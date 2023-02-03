@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class ChracterControl : MonoBehaviour
 {
-    [SerializeField] private Animation Animation;
-    private bool isGround;
+    private Animation _animation;
+    private Rigidbody2D _rb;
+    [SerializeField] private float _force = 50;
+    private bool _isGrounded = false;
+    private bool _jump = false;
     void Start()
     {
-        
+        _rb = GetComponent<Rigidbody2D>();
+        _animation = GetComponent<Animation>();
     }
 
     void Update()
@@ -16,29 +20,43 @@ public class ChracterControl : MonoBehaviour
     
         if(Input.GetMouseButtonDown(0))
         {
-            Animation.Jump(true);
+            if (_isGrounded)
+            {
+                _isGrounded = false;     
+                _jump = true;
+                _animation.Jump(true);      
+            }
         }
-        else if (isGround == true)
+        else if (_isGrounded == true)
         {
-            Animation.Jump(false);
+            _animation.Jump(false);
         }
         if(Input.GetMouseButtonDown(1))
         {
-            Animation.trip(true);
+            _animation.trip(true);
         }
         if(Input.GetMouseButtonUp(1))
-        {
-            Animation.trip(false);
+        {   
+            _animation.trip(false);
         }
+    }
+    private void FixedUpdate() {
+        jumpAction();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Ground"))
         {
-            isGround = true;
+            _isGrounded = true;
         }
     }
-    private void OnCollisionExit2D(Collision2D other) {
-        isGround = false;
+
+    private void jumpAction()
+    {
+        if (_jump)
+        {
+            _rb.AddForce(new Vector2(0, _force), ForceMode2D.Impulse);
+            _jump = false;
+        }
     }
 }
