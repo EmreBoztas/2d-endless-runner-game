@@ -257,7 +257,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!61 &1177565890
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kindergartner
       objectReference: {fileID: 0}
+    - target: {fileID: 9178090177391721229, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 9178090177391721266, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_Controller
       value: 
@@ -532,7 +536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9178090177391721267, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.03
+      value: -6.31
       objectReference: {fileID: 0}
     - target: {fileID: 9178090177391721267, guid: 037845a52a053c14e90209ee8f80e06c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -586,6 +590,10 @@ PrefabInstance:
     - target: {fileID: 2603448262365774733, guid: 77c3773895c353b479e3970203f67be0, type: 3}
       propertyPath: m_Name
       value: EnemyBirdSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603448262365774733, guid: 77c3773895c353b479e3970203f67be0, type: 3}
+      propertyPath: m_TagString
+      value: Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 2603448262365774734, guid: 77c3773895c353b479e3970203f67be0, type: 3}
       propertyPath: m_RootOrder
@@ -667,6 +675,10 @@ PrefabInstance:
     - target: {fileID: 37584152701546112, guid: 923e0bded15f99741975b28147ca8857, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 37584152701546112, guid: 923e0bded15f99741975b28147ca8857, type: 3}
+      propertyPath: m_TagString
+      value: Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 2988071804191540562, guid: 923e0bded15f99741975b28147ca8857, type: 3}
       propertyPath: m_RootOrder

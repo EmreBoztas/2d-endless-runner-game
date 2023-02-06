@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6354311291656812639}
   m_Layer: 0
   m_Name: EnemyPenguinSpawner
-  m_TagString: Untagged
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36e8eedd8d58ea418cdcc536f1b0029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnTime: 10
-  minSpawnTime: 3.37
-  penguin: {fileID: 8059702013825067812, guid: b8fe4ea44bed4804bb5e96fc7b288ef1, type: 3}
+  _maxSpawnTime: 3
+  _minSpawnTime: 1
+  _penguin: {fileID: 0}
+  _birdSpawner: {fileID: 0}
