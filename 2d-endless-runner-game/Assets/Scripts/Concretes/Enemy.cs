@@ -5,12 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Animation _animation;
+    
     private GameObject[] _spawner;
     [SerializeField] private float _speed = 10;
+
     void Start()
     {
+        GameManager _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Destroy (gameObject, 5);
-        
+        _speed  = _speed + _gameManager._score / 100;
     }
 
     void Update()
