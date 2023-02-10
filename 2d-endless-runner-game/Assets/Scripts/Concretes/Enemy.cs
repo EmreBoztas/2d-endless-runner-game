@@ -5,25 +5,30 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Animation _animation;
-    
     private GameObject[] _spawner;
+    
     [SerializeField] private float _speed = 10;
 
     void Start()
     {
-        GameManager _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        Destroy (gameObject, 5);
-        _speed  = _speed + _gameManager._score / 100;
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Destroy(gameObject, 5);
+        _speed  = _speed + gameManager._score / 100;
     }
 
     void Update()
     {
         transform.Translate(Vector2.right * _speed * Time.deltaTime);
     }
+    
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player"))
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(tag);
+
+            GameObject gameOverPanel = GameObject.Find("GameCanvas").transform.GetChild(0).gameObject;
+            gameOverPanel.SetActive(true);
+            
             for(int i = 0; i < enemies.Length; i++)
             {
                 Destroy(enemies[i]);

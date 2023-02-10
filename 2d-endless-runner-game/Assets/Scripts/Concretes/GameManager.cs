@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int _score;
@@ -15,5 +15,10 @@ public class GameManager : MonoBehaviour
     private void IncreaseScore()
     {
         _score += 5;
+    }
+
+    public void RestartLevel()
+    {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

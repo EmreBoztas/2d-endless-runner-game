@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4db65a472a1e054b8a8afa165509bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 6661173074814936337, guid: 0435f4a993678d84682ab682d059211c, type: 3}
+  gameOverPanel: {fileID: 4550675928809294331, guid: d4e6c442d07048f4e881b862faaa9358, type: 3}
   _speed: 10
 --- !u!61 &580185484425098832
 BoxCollider2D:
