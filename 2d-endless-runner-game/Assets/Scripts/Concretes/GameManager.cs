@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
     {
         _score += 5;
         _scoreText.text = "Score: " + _score;
+        GameObject[] bgs = GameObject.FindGameObjectsWithTag("Background");
+        foreach(GameObject bg in bgs)
+        {
+            RepeatBackground repeatBackground = bg.GetComponent<RepeatBackground>();
+            repeatBackground.ChangeSpeed((float)_score);
+        }
     }
 
     public void RestartLevel()

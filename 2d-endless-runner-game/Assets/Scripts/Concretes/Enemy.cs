@@ -8,13 +8,17 @@ public class Enemy : MonoBehaviour
     private GameObject[] _spawner;
     GameManager gameManager;
     
-    [SerializeField] private float _speed = 10;
+    [SerializeField] private float _speed = 15;
 
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Destroy(gameObject, 5);
-        _speed  = _speed + gameManager._score / 100;
+        _speed  = _speed + (float)gameManager._score / 70;
+        if (_speed > 20)
+        {
+            _speed = 20;
+        }
     }
 
     void Update()
@@ -29,10 +33,17 @@ public class Enemy : MonoBehaviour
 
             GameObject gameOverPanel = GameObject.Find("GameCanvas").transform.GetChild(0).gameObject;
             gameOverPanel.SetActive(true);
-            
-            for(int i = 0; i < enemies.Length; i++)
+
+
+            GameObject[] bgs = GameObject.FindGameObjectsWithTag("Background");
+            foreach(GameObject bg in bgs)
             {
-                Destroy(enemies[i]);
+                RepeatBackground repeatBackground = bg.GetComponent<RepeatBackground>();
+                repeatBackground.StopMove();
+            }
+            foreach(GameObject enemy in enemies)
+            {
+                Destroy(enemy);
             }
             StopGame();
         }
