@@ -6,12 +6,13 @@ public class Enemy : MonoBehaviour
 {
     private Animation _animation;
     private GameObject[] _spawner;
+    GameManager gameManager;
     
     [SerializeField] private float _speed = 10;
 
     void Start()
     {
-        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Destroy(gameObject, 5);
         _speed  = _speed + gameManager._score / 100;
     }
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
 
     private void StopGame()
     {
+        gameManager.StopScore();
         _animation = GameObject.FindGameObjectWithTag("Player").GetComponent<Animation>();
         _animation.Die();
         _spawner = GameObject.FindGameObjectsWithTag("Spawner");
