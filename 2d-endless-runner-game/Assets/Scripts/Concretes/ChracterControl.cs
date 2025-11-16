@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ChracterControl : MonoBehaviour
 {
-    private Animation _animation;
-    private Rigidbody2D _rb;
-    [SerializeField] private float _force = 50;
-    private bool _isGrounded = false;
-    private bool _jump = false;
+    Animation _animation;
+    Rigidbody2D _rb;
+
+    Vector2 startTouchPosition; 
+    float minSwipeDistance = 50f; 
+    bool _isTripping = false;
+
+    [SerializeField] float _force = 50;
+    bool _isGrounded = false;
+    bool _jump = false;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -17,8 +22,7 @@ public class ChracterControl : MonoBehaviour
 
     void Update()
     {
-    
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (_isGrounded)
             {
@@ -31,15 +35,74 @@ public class ChracterControl : MonoBehaviour
         {
             _animation.Jump(false);
         }
-        if(Input.GetMouseButtonDown(1))
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             _animation.trip(true);
+            _isTripping = true;
         }
-        if(Input.GetMouseButtonUp(1))
+        if (Input.GetKeyUp(KeyCode.DownArrow)) 
         {   
             _animation.trip(false);
+            _isTripping = false;
+        }
+
+        // Swipe Control
+
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    startTouchPosition = touch.position;
+                    break;
+
+                case TouchPhase.Moved:
+                    Vector2 currentTouchPosition = touch.position;
+                    float swipeDeltaY = currentTouchPosition.y - startTouchPosition.y;
+
+                    if (swipeDeltaY < -minSwipeDistance && !_isTripping)
+                    {
+                        _animation.trip(true);
+                        _isTripping = true;
+                    }
+                    break;
+
+                case TouchPhase.Ended:
+                    
+                    if (_isTripping)
+                    {
+                        _animation.trip(false);
+                        _isTripping = false;
+                    }
+                    else 
+                    {
+                        Vector2 endTouchPosition = touch.position;
+                        float deltaX = endTouchPosition.x - startTouchPosition.x;
+                        float deltaY = endTouchPosition.y - startTouchPosition.y;
+
+                        if (Mathf.Abs(deltaY) > Mathf.Abs(deltaX) && deltaY > minSwipeDistance)
+                        {
+                            if (_isGrounded)
+                            {
+                                _isGrounded = false;     
+                                _jump = true;
+                                _animation.Jump(true);      
+                            }
+                        }
+                    }
+                    break; 
+            }
+        }
+        else if (_isGrounded == true && !_isTripping) 
+        {
+             _animation.Jump(false);
         }
     }
+
+    
     private void FixedUpdate() {
         jumpAction();
     }

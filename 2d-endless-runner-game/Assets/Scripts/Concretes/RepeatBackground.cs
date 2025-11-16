@@ -29,7 +29,7 @@ public class RepeatBackground : MonoBehaviour
 
     private void Reposition()
     {        
-        Vector3 vector = new Vector3(_width *2f, 0, 0);
+        Vector3 vector = new Vector3(_width * 3f, 0, 0);
         transform.position = (Vector3)transform.position + vector;
     }
 
